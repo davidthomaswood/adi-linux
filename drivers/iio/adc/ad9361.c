@@ -1234,7 +1234,7 @@ static int ad9361_load_mixer_gm_subtable(struct ad9361_rf_phy *phy)
 	return 0;
 }
 
-static int ad9361_set_tx_atten(struct ad9361_rf_phy *phy, u32 atten_mdb,
+int ad9361_set_tx_atten(struct ad9361_rf_phy *phy, u32 atten_mdb,
 			       bool tx1, bool tx2, bool immed)
 {
 	u8 buf[2];
@@ -1266,8 +1266,9 @@ static int ad9361_set_tx_atten(struct ad9361_rf_phy *phy, u32 atten_mdb,
 
 	return ret;
 }
+EXPORT_SYMBOL(ad9361_set_tx_atten);
 
-static int ad9361_get_tx_atten(struct ad9361_rf_phy *phy, u32 tx_num)
+int ad9361_get_tx_atten(struct ad9361_rf_phy *phy, u32 tx_num)
 {
 	u8 buf[2];
 	int ret = 0;
@@ -1285,6 +1286,7 @@ static int ad9361_get_tx_atten(struct ad9361_rf_phy *phy, u32 tx_num)
 
 	return code;
 }
+EXPORT_SYMBOL(ad9361_get_tx_atten);
 
 int ad9361_tx_mute(struct ad9361_rf_phy *phy, u32 state)
 {
@@ -3718,7 +3720,7 @@ static int ad9361_get_auxadc(struct ad9361_rf_phy *phy)
   // Setup Control Outs
   //************************************************************
 
-static int ad9361_ctrl_outs_setup(struct ad9361_rf_phy *phy,
+int ad9361_ctrl_outs_setup(struct ad9361_rf_phy *phy,
 				  struct ctrl_outs_control *ctrl)
 {
 	struct spi_device *spi = phy->spi;
@@ -3728,6 +3730,7 @@ static int ad9361_ctrl_outs_setup(struct ad9361_rf_phy *phy,
 	ad9361_spi_write(spi, REG_CTRL_OUTPUT_POINTER, ctrl->index); // Ctrl Out index
 	return ad9361_spi_write(spi, REG_CTRL_OUTPUT_ENABLE, ctrl->en_mask); // Ctrl Out [7:0] output enable
 }
+EXPORT_SYMBOL(ad9361_ctrl_outs_setup);
   //************************************************************
   // Setup GPO
   //************************************************************
